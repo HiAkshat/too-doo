@@ -30,11 +30,11 @@ export default function Note(){
   return (
     <Masonry
     breakpointCols={breakpointColumnsObj}
-    className="flex max-w-[1480px] m-auto gap-[40px] mt-[50px] px-[40px]"
+    className="flex max-w-[1480px] m-auto gap-[40px] my-[40px] px-[40px] "
     columnClassName="flex flex-col gap-[40px]"
   >
-    {notes.map((note) => (
-      <div className="flex flex-col gap-[10px] py-[15px] border border-[#676970] rounded-[10px] whitespace-pre-wrap">
+    {notes.map((note, id) => (
+      <div key={id} className="flex flex-col gap-[10px] py-[15px] border border-[#676970] rounded-[10px] whitespace-pre-wrap">
         <span className='text-[20px] px-[15px] text-white'>Heading Thing goes here with the title and shit</span>
         <hr className='border-[#676970]'/>
         <p className='px-[15px]'>{note}</p>
