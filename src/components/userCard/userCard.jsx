@@ -6,7 +6,7 @@ import UserAvatar from "../userAvatar/userAvatar"
 
 const LoggedInCard = ({user}) => {
   return (
-    <div className="flex gap-[18px] text-white p-2">
+    <div className="flex gap-[18px] text-white p-2 font-['Hachi_Maru_Pop',cursive]">
       <UserAvatar width={50} />
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
@@ -23,7 +23,7 @@ const LoggedInCard = ({user}) => {
 
 const LoggedOutCard = () => {
   return (
-    <div className="flex gap-[18px] text-white p-2">
+    <div className="flex gap-[18px] text-white p-2 font-['Hachi_Maru_Pop',cursive]">
       <UserAvatar width={50} />
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
@@ -45,8 +45,4 @@ export default function UserCard() {
 
   if (session.status==="unauthenticated") return <LoggedOutCard />
   if (session.status==="authenticated") return <LoggedInCard user={session.data.user}/>
-
-  // return (
-  //   <LoggedInCard />
-  // )
 }
