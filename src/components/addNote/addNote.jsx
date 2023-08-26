@@ -1,13 +1,19 @@
 "use client"
 
 import { useState } from "react"
+import { useSession } from "next-auth/react"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function AddNote() {
   const [title, setTitle] = useState("")
   const [desc, setDesc] = useState("")
+  const { toast } = useToast()
+
+  const session = useSession();
 
   const handleAddNote = async () => {
-    await fetch(`http://localhost:5000/api/v1/notes`, {
+    const res = await fetch(`http://localhost:5000/api/v1/notes`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -15,9 +21,24 @@ export default function AddNote() {
       body: JSON.stringify({
         title: title,
         desc: desc,
-        user: "1"
+        user: session.data.user.email
       })
     })
+
+    if (!res.ok){
+      console.log(res)
+      toast({
+        variant: "destructive",
+        title: "Invalid data!",
+      })
+      
+      return
+    }
+    
+    toast({
+      title: "New note created!",
+    })
+
   }
 
   return (
@@ -30,6 +51,7 @@ export default function AddNote() {
           <button onClick={handleAddNote} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2">+ add note</button>
         </div>
       </div>
+      <Toaster className="dark"/>
     </div>
   )
 }
