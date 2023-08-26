@@ -1,51 +1,52 @@
+"use client"
+
 import Image from 'next/image'
 import Navbar from '@/components/navbar/navbar'
 import Notes from '@/components/notes/notes'
 import { getUserNotes } from '@/app/api/auth/[...nextauth]/notesData'
 import AddNote from '@/components/addNote/addNote'
+import { useSession } from 'next-auth/react'
+import useSWR from "swr"
+import { useEffect } from 'react'
 
-export default async function Home() {
-  // const data = await getUserNotes(1);
-  // const userNotes = data.data.notes
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
-  const userNotes = [
-    {
-      id: "1",
-      title: "this is a note",
-      desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    },
-    {
-      id: "2",
-      title: "this is a note how you odon mate",
-      desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    },
-    {
-      id: "3",
-      title: "this is a note",
-      desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    },
-    {
-      id: "4",
-      title: "this is a note",
-      desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    },
-    {
-      id: "5",
-      title: "this is a note",
-      desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    },
-    {
-      id: "6",
-      title: "this is a note",
-      desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    },
-  ]
+export default function Home() {
+  const session = useSession()
+
+  const apiEndpoint = session.status === 'authenticated' ? `http://localhost:5000/api/v1/notes/${session.data.user.email}` : null;
+  const { data, error, isLoading } = useSWR(apiEndpoint, fetcher);
+
+  if (session.status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (session.status === 'authenticated') {
+    if (error) {
+      return <div><Navbar /></div>;
+    }
+
+    if (!data) {
+      return <div>Loading...</div>;
+    }
+
+    // Data is available
+    const userNotes = data.data.notes
+    return (
+      <main className="">
+      <Navbar />
+      <AddNote />
+      <Notes userNotes={userNotes}/>
+    </main>
+    );
+  }
+
 
   return (
     <main className="">
       <Navbar />
       <AddNote />
-      <Notes userNotes={userNotes}/>
+      {/* <Notes userNotes={userNotes}/> */}
     </main>
   )
 }
