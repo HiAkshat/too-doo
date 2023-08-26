@@ -87,3 +87,7 @@ body{
   background-color: var(--bg-col);
   color: var(--text-col);
 }
+
+.nav-shadow{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

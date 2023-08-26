@@ -12,7 +12,7 @@ export default function Notes({userNotes}){
   return (
     <Masonry
     breakpointCols={breakpointColumnsObj}
-    className="flex max-w-[1480px] m-auto gap-[40px] my-[40px] px-[40px] "
+    className="flex max-w-[1480px] m-auto gap-[40px] my-[40px] px-[40px]"
     columnClassName="flex flex-col gap-[40px]"
   >
     {userNotes.map(note => (
