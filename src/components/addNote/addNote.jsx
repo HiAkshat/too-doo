@@ -52,7 +52,7 @@ export default function AddNote() {
   }
 
   return (
-    <div className="max-w-[1480px] md:max-w- mx-auto my-[40px] px-[40px]">
+    <div className="max-w-[1480px] md:max-w- mx-auto my-[40px] px-[20px] md:px-[40px]">
       <div className="flex flex-col lg:w-[500px] mx-auto gap-[10px] py-[15px] border border-[#676970] rounded-[10px] whitespace-pre-wrap">
         {showTitleInput &&
           <div className={`${showTitleInput && 'show'} flex flex-col gap-[10px]`}>
@@ -62,10 +62,10 @@ export default function AddNote() {
         }
         <textarea onClick={handleDescClick} value={desc} onChange={e => setDesc(e.target.value)} rows={showTitleInput ? 3 : 1} className="add-note-scroll text-lg px-[15px] outline-none text-[#EDEDED] bg-transparent resize-none" type="text" placeholder="What's on your mind?" />
         <div className="px-[15px] flex justify-end">
-          <button onClick={handleAddNote} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2">+ add note</button>
+          <button onClick={handleAddNote} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">+ add note</button>
         </div>
       </div>
-      <Toaster className="dark"/>
+      <Toaster className="dark z-[999]"/>
     </div>
   )
 }
