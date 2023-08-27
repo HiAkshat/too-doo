@@ -20,7 +20,7 @@ export default function Home() {
 
   if (session.status === 'authenticated') {
     if (error) {
-      return <div><Navbar />ERROROR</div>;
+      return <div><Navbar />{error}</div>;
     }
 
     if (!data) {
