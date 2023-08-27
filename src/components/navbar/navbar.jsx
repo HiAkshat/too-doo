@@ -9,10 +9,10 @@ import UserAvatar from "../userAvatar/userAvatar"
 
 export default function Navbar() {
   return (
-    <div className="sticky top-0 w-full h-[70px] bg-[#2A2B2F] nav-shadow">
-      <div className="flex h-full items-center m-auto justify-between max-w-[1480px] px-[40px]">
+    <div className="z-[99] sticky top-0 w-full h-[70px] bg-[#2A2B2F] nav-shadow">
+      <div className="flex h-full items-center m-auto justify-between max-w-[1480px] px-[20px] md:px-[40px]">
         <span className="text-[28px] text-white font-['Hachi_Maru_Pop',cursive]">(too-doo)</span>
-        <input className="w-[500px] text-lg bg-[#494B51] h-[40px] rounded-lg outline-none px-[15px]" placeholder="type to search" type="text" />
+        <input className="hidden md:block w-[480px] text-lg bg-[#494B51] h-[40px] rounded-lg outline-none px-[15px]" placeholder="type to search" type="text" />
         <Popover className="mr-8">
           <PopoverTrigger>
             <UserAvatar width={50}/>

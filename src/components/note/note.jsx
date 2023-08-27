@@ -40,7 +40,7 @@ export default function Note({noteId, title, desc}){
         </ScrollBar>
       </ScrollArea>
       <div className="flex justify-end px-[15px]">
-        <button onClick={handleDelete} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2">
+        <button onClick={handleDelete} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">
           <div><DeleteRoundedIcon fontSize="inherit"/></div>
         </button>
       </div>
