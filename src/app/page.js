@@ -38,7 +38,7 @@ export default function Home() {
     );
   }
 
-
+  // User not authenticated
   return (
     <main className="">
       <Navbar />
