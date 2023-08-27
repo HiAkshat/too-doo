@@ -4,7 +4,7 @@ import useSWR from "swr"
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export const getUserNotes = () => {
+export const GetUserNotes = () => {
   const session = useSession()
 
   const apiEndpoint = session.status === 'authenticated' ? `http://localhost:5000/api/v1/notes/user/${session.data.user.email}` : null;

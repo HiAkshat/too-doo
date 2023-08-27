@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Navbar from '@/components/navbar/navbar'
 import Notes from '@/components/notes/notes'
-import { getUserNotes, getUserNotes2 } from '@/app/api/auth/[...nextauth]/notesData'
+import { GetUserNotes, getUserNotes2 } from '@/app/api/auth/[...nextauth]/notesData'
 import AddNote from '@/components/addNote/addNote'
 import { useSession } from 'next-auth/react'
 import useSWR from "swr"
@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 
 export default function Home() {
   const session= useSession()
-  const {data, error, isLoading} = getUserNotes()
+  const {data, error, isLoading} = GetUserNotes()
 
   if (session.status === 'loading') {
     return <div>Loading...</div>;
