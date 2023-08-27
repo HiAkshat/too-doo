@@ -16,7 +16,7 @@ export default function Notes({userNotes}){
     columnClassName="flex flex-col gap-[40px]"
   >
     {userNotes.map(note => (
-      <Note key={note.id} title={note.title} desc={note.desc} />
+      <Note key={note._id} noteId={note._id} title={note.title} desc={note.desc} />
     ))}
 
   </Masonry>
