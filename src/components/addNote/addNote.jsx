@@ -23,7 +23,7 @@ export default function AddNote() {
     setTitle("")
     setDesc("")
 
-    const res = await fetch(`http://localhost:5000/api/v1/notes`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/notes`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

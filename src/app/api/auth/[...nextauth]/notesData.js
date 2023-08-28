@@ -11,7 +11,7 @@ const fetcher = (url) => fetch(url, {
 export const GetUserNotes = () => {
   const session = useSession()
 
-  const apiEndpoint = session.status === 'authenticated' ? `http://localhost:5000/api/v1/notes/user/${session.data.user.email}?sort=-createdAt&api_key=thisisthekey` : null;
+  const apiEndpoint = session.status === 'authenticated' ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/notes/user/${session.data.user.email}?sort=-createdAt&api_key=thisisthekey` : null;
   const { data, error, isLoading } = useSWR(apiEndpoint, fetcher, {
     revalidateOnFocus: true, // Revalidate when the tab/window is focused
     revalidateOnReconnect: true, // Revalidate when the network reconnects
