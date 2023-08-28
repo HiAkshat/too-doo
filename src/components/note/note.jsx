@@ -1,8 +1,17 @@
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { ScrollAreaThumb } from "@radix-ui/react-scroll-area";
+import NoteBox from "../noteBox/noteBox";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger
+} from "@/components/ui/dialog"
+
 
 export default function Note({noteId, title, desc}){
   const { toast } = useToast()
@@ -42,7 +51,20 @@ export default function Note({noteId, title, desc}){
         <ScrollAreaThumb className=""/>
         </ScrollBar>
       </ScrollArea>
-      <div className="flex justify-end px-[15px]">
+      <div className="flex justify-end px-[15px] gap-[10px]">
+        <button className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">
+          <div>
+            <Dialog>
+              <DialogTrigger>
+                <CreateRoundedIcon fontSize="inherit"/>
+              </DialogTrigger>
+              <DialogContent className="bg-transparent">
+                <NoteBox initTitle={title} initDesc={desc} />  
+              </DialogContent>
+            </Dialog>
+          
+          </div>
+        </button>
         <button onClick={handleDelete} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">
           <div><DeleteRoundedIcon fontSize="inherit"/></div>
         </button>
