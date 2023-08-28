@@ -2,7 +2,11 @@
 import { useSession } from "next-auth/react"
 import useSWR from "swr"
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url, {
+  headers: {
+    "x-api-key": process.env.NEXT_PUBLIC_AUTH_KEY
+  }
+}).then((res) => res.json());
 
 export const GetUserNotes = () => {
   const session = useSession()
