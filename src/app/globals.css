@@ -139,3 +139,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   /* outline: 1px solid slategrey; */
 }
+
+.spin-duration{
+  animation-duration: 2s;
+}

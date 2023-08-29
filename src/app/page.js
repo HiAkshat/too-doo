@@ -8,6 +8,7 @@ import AddNote from '@/components/addNote/addNote'
 import { useSession } from 'next-auth/react'
 import useSWR from "swr"
 import { useEffect } from 'react'
+import Loading from './loading'
 
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
   const {data, error, isLoading} = GetUserNotes()
 
   if (session.status === 'loading') {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   if (session.status === 'authenticated') {
@@ -24,7 +25,7 @@ export default function Home() {
     }
 
     if (!data) {
-      return <div>Loading...</div>;
+      return <Loading />
     }
 
     // Data is available
