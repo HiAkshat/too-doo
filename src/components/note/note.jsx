@@ -9,7 +9,7 @@ import NoteBox from "../noteBox/noteBox";
 import {
   Dialog,
   DialogContent,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog"
 
 
@@ -52,19 +52,18 @@ export default function Note({noteId, title, desc}){
         </ScrollBar>
       </ScrollArea>
       <div className="flex justify-end px-[15px] gap-[10px]">
-        <button className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">
-          <div>
-            <Dialog>
-              <DialogTrigger>
+        <div>
+          <Dialog>
+            <DialogTrigger>
+              <button className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">
                 <CreateRoundedIcon fontSize="inherit"/>
-              </DialogTrigger>
-              <DialogContent className="bg-transparent">
-                <NoteBox initTitle={title} initDesc={desc} />  
-              </DialogContent>
-            </Dialog>
-          
+              </button>
+            </DialogTrigger>
+            <DialogContent className="bg-transparent">
+              <NoteBox initTitle={title} initDesc={desc} noteId={noteId}/>  
+            </DialogContent>
+          </Dialog>          
           </div>
-        </button>
         <button onClick={handleDelete} className="bg-[#2A2B2F] w-max rounded-[10px] py-1 px-2 hover:bg-[#36373c]">
           <div><DeleteRoundedIcon fontSize="inherit"/></div>
         </button>
