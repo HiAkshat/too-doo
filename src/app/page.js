@@ -1,22 +1,21 @@
 "use client"
 
-import Image from 'next/image'
 import Navbar from '@/components/navbar/navbar'
 import Notes from '@/components/notes/notes'
-import { GetUserNotes, getUserNotes2 } from '@/app/api/auth/[...nextauth]/notesData'
+import { GetUserNotes } from '@/app/api/auth/[...nextauth]/notesData'
 import AddNote from '@/components/addNote/addNote'
 import { useSession } from 'next-auth/react'
 import useSWR from "swr"
 import { useEffect, useState } from 'react'
 import Loading from './loading'
-import { searchInputAtom } from './atoms'
+import { searchInputAtom, localNotesAtom } from './atoms'
 import { useAtom } from 'jotai'
+import InfoIcon from '@mui/icons-material/Info';
 
 
 export default function Home() {
   const [searchInput, setSearchInput] = useAtom(searchInputAtom)
-  // const [userNotes, setUserNotes] = useState([])
-  let userNotes;
+  const [localNotes, setLocalNotes] = useAtom(localNotesAtom)
 
   const session= useSession()
   const {data, error, isLoading} = GetUserNotes()
@@ -45,7 +44,7 @@ export default function Home() {
     }
 
     // Data is available
-    
+
     // const userNotes = data.data.notes
     updateUserNotes()
     return (
@@ -58,11 +57,18 @@ export default function Home() {
   }
 
   // User not authenticated
+
   return (
     <main className="">
       <Navbar />
+      <div className='max-w-[1480px] m-auto gap-[20px] my-[40px] px-[20px] md:px-[40px]'>
+        <div className='flex items-center gap-3 max-w-full bg-[#2A2B2F] py-2 px-5 rounded-[10px]'>
+          <div><InfoIcon /></div>
+          <span>login with google to store your notes in the cloud</span>
+        </div>
+      </div>
       <AddNote />
-      {/* <Notes userNotes={userNotes}/> */}
+      <Notes userNotes={localNotes}/>
     </main>
   )
 }
