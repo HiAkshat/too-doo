@@ -4,11 +4,13 @@ import { useState } from "react"
 import { useSession } from "next-auth/react"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
+import { localNotesAtom } from "@/app/atoms"
 
 export default function AddNote() {
   const [showTitleInput, setShowTitleInput] = useState(false);
   const [title, setTitle] = useState("")
   const [desc, setDesc] = useState("")
+  const [localNotes, setLocalNotes] = useState(localNotesAtom)
 
   const { toast } = useToast()
 
@@ -22,6 +24,23 @@ export default function AddNote() {
     setShowTitleInput(false)
     setTitle("")
     setDesc("")
+
+    if (session.status === "unauthenticated"){
+      if (localStorage.getItem("0")===null) localStorage.setItem("0", JSON.stringify([]))
+      
+      const notes = JSON.parse(localStorage.getItem("0"))
+      notes.push({
+        id: notes.length,
+        title: title,
+        desc: desc
+      })
+      
+      localStorage.setItem("0", JSON.stringify(notes))
+      setLocalNotes(JSON.parse(localStorage.getItem("0")))
+      console.log(JSON.parse(localStorage.getItem("0")))
+
+      return 
+    }
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/notes`, {
       method: "POST",
@@ -57,7 +76,7 @@ export default function AddNote() {
       <div className="flex flex-col lg:w-[500px] mx-auto gap-[10px] py-[15px] border border-[#676970] rounded-[10px] whitespace-pre-wrap">
         {showTitleInput &&
           <div className={`${showTitleInput && 'show'} flex flex-col gap-[10px]`}>
-            <input value={title} onChange={e => setTitle(e.target.value)} className='text-2xl px-[15px] bg-transparent text-white outline-none' type="text" placeholder="Add title"/>
+            <input value={title} onChange={e => setTitle(e.target.value)} className='text-2xl px-[15px] bg-transparent text-white outline-none' type="text" placeholder="add title"/>
             <hr className='border-[#676970]'/>
           </div>
         }
