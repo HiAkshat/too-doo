@@ -23,13 +23,14 @@ export default function UnauthPage() {
   return (
     <div className="">
       <Navbar />
-      <div className="fixed h-[100vh] flex overflow-hidden max-w-[100%] m-auto gap-[64px] my-[40px] px-[20px] md:px-[40px]">
-        <div className="hidden md:flex flex-col gap-[49px]">
-          <Box w={298} h={320} r={81} />
-          <Box w={298} h={214} r={107} />
-          <Box w={298} h={320} r={58} />
+      <div className="overflow-hidden fixed flex w-full overflow- max-w-[100%] m-auto gap-[64px] my-[40px] px-[20px] md:px-[40px]">
+        <div className="flex-1 hidden md:flex flex-col gap-[30px]">
+          <div className="h-[320px] rounded-[81px] border border-[#D9D9D9]" ></div>
+          <div className="h-[214px] rounded-[107px] border border-[#D9D9D9]" ></div>
+          <div className="h-[320px] rounded-[320px] border border-[#D9D9D9]" ></div>
+
         </div>
-        <div className="flex flex-col gap-[49px]">
+        <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
             <ul className="text-[28px] lowercase">
               <li>• Create, edit, and delete notes</li>
@@ -43,11 +44,11 @@ export default function UnauthPage() {
             <span className="text-[48px]"><span onClick={() => signIn("google")} className="underline cursor-pointer">login with google</span> and start now</span>
           </div>
 
-          <div className="flex gap-[64px]">
-            <Box w={522} h={449} r={29} />
-            <div className="flex flex-col gap-[49px]">
-              <Box w={522} h={120} r={29} />
-              <Box w={522} h={336} r={80} />
+          <div className="flex justify-between md:justify-normal gap-[20px] md:gap-[64px]">
+            <div className="flex-1 h-[449px] rounded-[50px] border border-[#D9D9D9]" ></div>
+            <div className="flex-1 flex flex-col gap-[30px]">
+              <div className="h-[120px] rounded-[29px] border border-[#D9D9D9]" ></div>
+              <div className="h-[336px] rounded-[80px] border border-[#D9D9D9]" ></div>
             </div>
           </div>
         </div>

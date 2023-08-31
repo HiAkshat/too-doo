@@ -6,19 +6,18 @@ import { GetUserNotes } from '@/app/api/auth/[...nextauth]/notesData'
 import AddNote from '@/components/addNote/addNote'
 import { useSession } from 'next-auth/react'
 import useSWR from "swr"
-import { useEffect, useState } from 'react'
 import Loading from './loading'
-import { searchInputAtom, localNotesAtom } from './atoms'
+import { searchInputAtom } from './atoms'
 import { useAtom } from 'jotai'
-import InfoIcon from '@mui/icons-material/Info';
+import UnauthPage from '@/components/unauthPage'
 
 
 export default function Home() {
   const [searchInput, setSearchInput] = useAtom(searchInputAtom)
-  const [localNotes, setLocalNotes] = useAtom(localNotesAtom)
 
   const session= useSession()
   const {data, error, isLoading} = GetUserNotes()
+  let userNotes;
 
   const updateUserNotes = () => {
     const filtered = data.data.notes.filter(
@@ -44,31 +43,19 @@ export default function Home() {
     }
 
     // Data is available
-
-    // const userNotes = data.data.notes
     updateUserNotes()
     return (
       <main className="">
-      <Navbar />
-      <AddNote />
-      <Notes userNotes={userNotes}/>
-    </main>
+        <Navbar />
+        <AddNote />
+        <Notes userNotes={userNotes}/>
+      </main>
     );
   }
 
   // User not authenticated
 
   return (
-    <main className="">
-      <Navbar />
-      <div className='max-w-[1480px] m-auto gap-[20px] my-[40px] px-[20px] md:px-[40px]'>
-        <div className='flex items-center gap-3 max-w-full bg-[#2A2B2F] py-2 px-5 rounded-[10px]'>
-          <div><InfoIcon /></div>
-          <span>login with google to store your notes in the cloud</span>
-        </div>
-      </div>
-      <AddNote />
-      <Notes userNotes={localNotes}/>
-    </main>
+    <UnauthPage />
   )
 }
