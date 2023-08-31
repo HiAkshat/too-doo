@@ -21,9 +21,9 @@ const Box = ({w, h, r}) => {
 
 export default function UnauthPage() {
   return (
-    <div className="">
+    <div className="flex flex-col items-center">
       <Navbar />
-      <div className="overflow-hidden fixed flex w-full overflow- max-w-[100%] m-auto gap-[64px] my-[40px] px-[20px] md:px-[40px]">
+      <div className="overflow-hidden fixed mt-[110px] flex w-full max-w-[1480px] gap-[64px] my-[40px] px-[20px] md:px-[40px]">
         <div className="flex-1 hidden md:flex flex-col gap-[30px]">
           <div className="h-[320px] rounded-[81px] border border-[#D9D9D9]" ></div>
           <div className="h-[214px] rounded-[107px] border border-[#D9D9D9]" ></div>
