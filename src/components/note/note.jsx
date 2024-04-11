@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
